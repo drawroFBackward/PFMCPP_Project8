@@ -14,7 +14,7 @@ void HighwayPatrol::scanHighway(Highway* h)
     for( size_t i = h->vehicles.size(); i-- > 0; )
     {
         auto* v = h->vehicles[i];
-        if( v->speed > h->speedLimit + 5 )
+        if( v->speed > h->speedLimit + 5)
         {
             pullOver(v, v->speed > (h->speedLimit + 15), h );
             h->changeSpeed(50); //slow down for the highway patrol
