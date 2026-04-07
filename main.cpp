@@ -81,7 +81,7 @@ int main()
     
     std::vector<Car> cars;
     std::vector<Motorcycle> motorcycles;
-    //std::vector<SemiTruck> trucks;
+    std::vector<SemiTruck> trucks;
     
     /*
      instantiating vectors like this creates unexpected copies during the construction process:
@@ -113,6 +113,8 @@ int main()
      reserve how ever many cars, motorcycles, and trucks you'll create first
      */
     cars.reserve(3); //reserving room for 3 Car instances
+	motorcycles.reserve(3); //reserving room for 3 Motorcycle instances
+	trucks.reserve(3); //reserving room for 3 SemiTruck instances
     
     /*
      Now that we have reserved space for our UDT instances inside the vector, we can construct them in-place inside the vector.
@@ -120,7 +122,14 @@ int main()
      
      use the vector member function 'emplace_back' to construct your car/truck/motorcycle instances in-place
      */
-    cars.emplace_back("janice"); //constructing the first Car instance in-place in the cars vector
+    //cars.emplace_back("janice"); //constructing the first Car instance in-place in the cars vector
+    
+    for ( int i = 0; i < 3; ++i )
+    {
+		cars.emplace_back("car " + std::to_string(i)); //constructing the first Car instance in-place in the cars vector
+        motorcycles.emplace_back("motorcycle " + std::to_string(i)); //constructing the first Motorcycle instance in-place in the motorcycles vector
+		trucks.emplace_back("semi-truck " + std::to_string(i)); //constructing the first SemiTruck instance in-place in the trucks vector
+	}
     
     /*
      construct 2 more Car instances via emplace_back.
