@@ -26,4 +26,5 @@ struct Vehicle
 protected:
     int speed = 0;
     std::string name;
+	friend class HighwayPatrol; //allowing the HighwayPatrol class to access protected members of the Vehicle class
 };

@@ -53,8 +53,11 @@ your task:
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <cassert>
+#include "Highway.h"
+#include "Car.h"
+#include "Motorcycle.h"
+#include "SemiTruck.h"
+#include "HighwayPatrol.h"
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
@@ -108,6 +111,8 @@ int main()
      reserve how ever many cars, motorcycles, and trucks you'll create first
      */
     cars.reserve(3); //reserving room for 3 Car instances
+	motorcycles.reserve(3); //reserving room for 3 Motorcycle instances
+	trucks.reserve(3); //reserving room for 3 SemiTruck instances
     
     /*
      Now that we have reserved space for our UDT instances inside the vector, we can construct them in-place inside the vector.
@@ -115,7 +120,14 @@ int main()
      
      use the vector member function 'emplace_back' to construct your car/truck/motorcycle instances in-place
      */
-    cars.emplace_back("janice"); //constructing the first Car instance in-place in the cars vector
+    //cars.emplace_back("janice"); //constructing the first Car instance in-place in the cars vector
+    
+    for ( int i = 0; i < 3; ++i )
+    {
+		cars.emplace_back("car " + std::to_string(i)); //constructing the first Car instance in-place in the cars vector
+        motorcycles.emplace_back("motorcycle " + std::to_string(i)); //constructing the first Motorcycle instance in-place in the motorcycles vector
+		trucks.emplace_back("semi-truck " + std::to_string(i)); //constructing the first SemiTruck instance in-place in the trucks vector
+	}
     
     /*
      construct 2 more Car instances via emplace_back.
@@ -128,8 +140,24 @@ int main()
     
     
     
-    assert(false);
+    //assert(false);
     //add the cars, motorcycles and trucks to the highway using range-based for() loops: for( element : vec ) { ... }
+    
+    for ( auto& car : cars ) //iterating through the cars vector by reference to avoid making copies of the Car instances
+    {
+        highway.addVehicle(&car); //passing the address of the car instance to addVehicle
+	}
+
+    for (auto& motorcycle : motorcycles) //iterating through the motorcycles vector by reference to avoid making copies of the Motorcycle instances
+    {
+        highway.addVehicle(&motorcycle); //passing the address of the motorcycle instance to addVehicle
+    }
+
+    for (auto& truck : trucks) //iterating through the trucks vector by reference to avoid making copies of the SemiTruck instances
+    {
+        highway.addVehicle(&truck); //passing the address of the truck instance to addVehicle
+	}
+
     //be careful to not accidentally make element copies when iterating.
     
     HighwayPatrol cop;
