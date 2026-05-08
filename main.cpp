@@ -53,8 +53,6 @@ your task:
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <cassert>
 #include "Highway.h"
 #include "Car.h"
 #include "Motorcycle.h"
@@ -144,6 +142,22 @@ int main()
     
     //assert(false);
     //add the cars, motorcycles and trucks to the highway using range-based for() loops: for( element : vec ) { ... }
+    
+    for ( auto& car : cars ) //iterating through the cars vector by reference to avoid making copies of the Car instances
+    {
+        highway.addVehicle(&car); //passing the address of the car instance to addVehicle
+	}
+
+    for (auto& motorcycle : motorcycles) //iterating through the motorcycles vector by reference to avoid making copies of the Motorcycle instances
+    {
+        highway.addVehicle(&motorcycle); //passing the address of the motorcycle instance to addVehicle
+    }
+
+    for (auto& truck : trucks) //iterating through the trucks vector by reference to avoid making copies of the SemiTruck instances
+    {
+        highway.addVehicle(&truck); //passing the address of the truck instance to addVehicle
+	}
+
     //be careful to not accidentally make element copies when iterating.
     
     HighwayPatrol cop;
